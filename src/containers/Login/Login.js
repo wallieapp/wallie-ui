@@ -1,10 +1,14 @@
-import { React } from 'react';
+import { React, useState } from 'react';
+
 import Login from '../../components/Login';
+import Loading from '../../components/Loading';
 
 const LoginContainer = () => {
-    return (
-        <Login/>
-    );
+    const [isLoading, setIsLoading] = useState(false);
+
+    return !isLoading ?
+        <Loading/>
+        : <Login/>
 };
 
 export default LoginContainer;
