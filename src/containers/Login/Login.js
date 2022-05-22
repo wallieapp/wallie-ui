@@ -1,14 +1,13 @@
-import { useState } from 'react';
+import { React } from 'react';
 
 import Login from '../../components/Login';
-import Loading from '../../components/Loading';
 
-const LoginContainer = () => {
-    const [isLoading, setIsLoading] = useState(false);
+const LoginContainer = props => {
+	const onSignUpClick = () => props.history.push('/sign-up');
 
-    return isLoading ?
-        <Loading width={100} height='100vh'/>
-        : <Login/>
+    return <Login
+        onSignUpClick={onSignUpClick}
+    />
 };
 
 export default LoginContainer;

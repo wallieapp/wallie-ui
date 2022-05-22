@@ -14,7 +14,9 @@ import {
   useColorModeValue
 } from "@chakra-ui/react";
 
-const Login = () => (
+import PropTypes from 'prop-types';
+
+const Login = ({ onSignUpClick }) => (
 	<ScaleFade in={true} initialScale={0.9}>
 		<Flex minH={"100vh"} align={"center"} justify={"center"} bg={useColorModeValue("gray.50", "gray.800")}>
 		<Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
@@ -36,7 +38,7 @@ const Login = () => (
 
 					<Stack spacing={10}>
 						<Stack direction={{ base: "column", sm: "row" }} justify={"center"}>
-							<Link color={"blue.400"}>Registre-se no Wallie.</Link>
+							<Link color={"blue.400"} onClick={onSignUpClick}>Registre-se no Wallie.</Link>
 						</Stack>
 
 						<Button
@@ -55,5 +57,9 @@ const Login = () => (
 		</Flex>
 	</ScaleFade>
 );
+
+Login.propTypes = {
+	onSignUpClick: PropTypes.func.isRequired
+};
 
 export default Login;
