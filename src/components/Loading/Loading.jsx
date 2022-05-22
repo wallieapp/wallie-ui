@@ -3,7 +3,7 @@ import Lottie from 'react-lottie';
 
 import Container from '../Container';
 
-const Loading = ({ withName, ...props }) => {
+const Loading = ({ ...props }) => {
 	const loadingAnimation = 'loading-animation.json';
 
 	return (
