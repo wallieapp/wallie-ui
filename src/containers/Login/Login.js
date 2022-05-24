@@ -1,3 +1,4 @@
+import { get } from 'lodash';
 import { React, useState } from 'react';
 
 import Login from '../../components/Login';
@@ -6,7 +7,7 @@ import { authenticate } from '../../services/auth.js';
 import { saveSession } from '../../services/storage';
 
 const LoginContainer = props => {
-    const [error, setError] = useState();
+    const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 
 	const onSignUpClick = () => props.history.push('/sign-up');
@@ -16,17 +17,24 @@ const LoginContainer = props => {
 	const onLoginClick = async ({ email, password }) => {
 		setLoading(true);
 
-		const { error, data } = await authenticate({ email, password });
+		const response = await authenticate({ email, password });
+        const responseData = get(response.data, 'data');
 
-        console.log(error, data)
+        console.log(responseData);
 
 		setLoading(false);
 
-		if (data) {
-			saveSession(data);
+		if (response.data && (response.data.status === 'success' && responseData.token)) {
+			saveSession(responseData);
 			props.history.push('/home');
 		} else {
-			setError(error.message);
+            const mappedErrorCodes = {
+                NO_RESULTS: 'Credenciais inválidas, tente novamente.'
+            };
+
+            const errorData = get(response.data, 'data');
+
+			setError(mappedErrorCodes[errorData] || 'Algum erro aconteceu, tente novamente mais tarde.');
 		}
 	};
 
@@ -36,7 +44,7 @@ const LoginContainer = props => {
             onLoginClick={onLoginClick}
             onSignUpClick={onSignUpClick}
             onForgotPasswordClick={onForgotPasswordClick}
-    />
+        />
 };
 
 export default LoginContainer;

@@ -1,4 +1,4 @@
-export const saveSession = ({ id, name, email, default_broker_id, token }) => {
+export const saveSession = ({ id, name, email, token }) => {
 	localStorage.setItem('id', id);
 	localStorage.setItem('name', name);
 	localStorage.setItem('email', email);
