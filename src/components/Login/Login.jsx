@@ -1,65 +1,87 @@
-import React from "react";
+import { React } from "react";
+import { Formik } from 'formik';
+import { PropTypes } from 'prop-types';
 
 import {
   Flex,
-  ScaleFade,
   Box,
-  FormControl,
   FormLabel,
   Input,
   Stack,
   Link,
   Button,
+  Text,
   Heading,
-  useColorModeValue
+  useColorModeValue,
 } from "@chakra-ui/react";
 
-import PropTypes from 'prop-types';
+const Login = ({
+    error,
+    loading,
+    onLoginClick,
+    onSignUpClick,
+    onForgotPasswordClick
+ }) => {
+    return (
+        <Flex
+            minH={"100vh"}
+            align={"center"}
+            justify={"center"}
+            bg={useColorModeValue("gray.50", "gray.800")}
+        >
+            <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+                <Stack align={"center"}>
+                    <Heading fontSize={"4xl"}>
+                        Olá, bem vindo ao Wallie!
+                    </Heading>
+                </Stack>
+                { error && <Box bg='red.500' borderRadius={'8px'} w='100%' p={4} color='white' textAlign={'center'}> { error } </Box> }
+                <Formik initialValues={{ email: '', password: '' }} onSubmit={onLoginClick}>
+						{({ values, handleChange, handleSubmit }) => (
+							<Box>
+								<Stack>
+									<FormLabel>Email</FormLabel>
+									<Input type={'email'} name={'email'} disabled={loading} placeholder="Informe seu email" onChange={handleChange} />
+								</Stack>
 
-const Login = ({ onSignUpClick }) => (
-	<ScaleFade in={true} initialScale={0.9}>
-		<Flex minH={"100vh"} align={"center"} justify={"center"} bg={useColorModeValue("gray.50", "gray.800")}>
-		<Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-			<Stack align={"center"}>
-				<Heading fontSize={"2xl"}>Olá, tudo bem? bem vindo ao Wallie.</Heading>
-			</Stack>
+								<Stack direction={'column'} marginTop={3}>
+									<Stack direction={'row'} justify={'space-between'}>
+                                        <FormLabel>Senha</FormLabel>
+                                        <Link onClick={onForgotPasswordClick} color={"gray.400"} _hover={{ color:"blue.400" }}>
+                                            Esqueceu a senha?
+                                        </Link>
+									</Stack>
+									<Input type={'password'} name={'password'} disabled={loading} placeholder="Informe sua senha" onChange={handleChange} />
+								</Stack>
 
-			<Box rounded={"lg"} bg={useColorModeValue("white", "gray.700")} boxShadow={"lg"} p={8} >
-				<Stack spacing={4}>
-					<FormControl id="email">
-						<FormLabel>Email</FormLabel>
-						<Input type="email" />
-					</FormControl>
+                                <Stack spacing={10}>
+                                    <Button bg={"blue.400"} color={"white"} _hover={{ bg: "blue.500" }} onClick={handleSubmit} disabled={!values.email || !values.password} marginTop={5} isLoading={loading}>
+                                        Entrar
+                                    </Button>
+                                </Stack>
 
-					<FormControl id="password">
-						<FormLabel>Senha</FormLabel>
-						<Input type="password" />
-					</FormControl>
-
-					<Stack spacing={10}>
-						<Stack direction={{ base: "column", sm: "row" }} justify={"center"}>
-							<Link color={"blue.400"} onClick={onSignUpClick}>Registre-se no Wallie.</Link>
-						</Stack>
-
-						<Button
-							bg={"blue.400"}
-							color={"white"}
-							_hover={{
-							bg: "blue.500"
-							}}
-						>
-							Entre
-						</Button>
-					</Stack>
-				</Stack>
-			</Box>
-		</Stack>
-		</Flex>
-	</ScaleFade>
-);
+                                <Stack fontSize='xs' direction={{ base: "column", sm: "row" }} align={"center"} justify={"center"} marginTop={3}>
+                                    <Text color={"gray.400"}>
+                                        Ainda não possui uma conta?
+                                    </Text>
+                                    <Link color={"blue.400"} onClick={onSignUpClick}>
+                                        Cadastre-se
+                                    </Link>
+                                </Stack>
+							</Box>
+						)}
+					</Formik>
+            </Stack>
+        </Flex>
+    );
+};
 
 Login.propTypes = {
-	onSignUpClick: PropTypes.func.isRequired
+	error: PropTypes.string,
+	loading: PropTypes.bool.isRequired,
+	onLoginClick: PropTypes.func.isRequired,
+	onSignUpClick: PropTypes.func.isRequired,
+	onForgotPasswordClick: PropTypes.func.isRequired
 };
 
 export default Login;
