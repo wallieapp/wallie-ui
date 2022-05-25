@@ -16,7 +16,6 @@ import {
 } from "@chakra-ui/react";
 
 const Login = ({
-    error,
     loading,
     onLoginClick,
     onSignUpClick,
@@ -32,10 +31,9 @@ const Login = ({
             <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
                 <Stack align={"center"}>
                     <Heading fontSize={"4xl"}>
-                        Olá, bem vindo ao Wallie!
+                        Olá, bem vindo ao Wallie! 💰
                     </Heading>
                 </Stack>
-                { error && <Box bg='red.500' borderRadius={'8px'} w='100%' p={4} color='white' textAlign={'center'}> { error } </Box> }
                 <Formik initialValues={{ email: '', password: '' }} onSubmit={onLoginClick}>
 						{({ values, handleChange, handleSubmit }) => (
 							<Box>
@@ -47,7 +45,7 @@ const Login = ({
 								<Stack direction={'column'} marginTop={3}>
 									<Stack direction={'row'} justify={'space-between'}>
                                         <FormLabel>Senha</FormLabel>
-                                        <Link onClick={onForgotPasswordClick} color={"gray.400"} _hover={{ color:"blue.400" }}>
+                                        <Link onClick={onForgotPasswordClick} color={"gray.400"} _hover={{ color:"green.400" }}>
                                             Esqueceu a senha?
                                         </Link>
 									</Stack>
@@ -55,7 +53,7 @@ const Login = ({
 								</Stack>
 
                                 <Stack spacing={10}>
-                                    <Button bg={"blue.400"} color={"white"} _hover={{ bg: "blue.500" }} onClick={handleSubmit} disabled={!values.email || !values.password} marginTop={5} isLoading={loading}>
+                                    <Button bg={"green.400"} color={"white"} _hover={{ bg: "green.500" }} onClick={handleSubmit} disabled={!values.email || !values.password} marginTop={5} isLoading={loading}>
                                         Entrar
                                     </Button>
                                 </Stack>
@@ -64,7 +62,7 @@ const Login = ({
                                     <Text color={"gray.400"}>
                                         Ainda não possui uma conta?
                                     </Text>
-                                    <Link color={"blue.400"} onClick={onSignUpClick}>
+                                    <Link color={"green.400"} onClick={onSignUpClick}>
                                         Cadastre-se
                                     </Link>
                                 </Stack>
@@ -77,7 +75,6 @@ const Login = ({
 };
 
 Login.propTypes = {
-	error: PropTypes.string,
 	loading: PropTypes.bool.isRequired,
 	onLoginClick: PropTypes.func.isRequired,
 	onSignUpClick: PropTypes.func.isRequired,

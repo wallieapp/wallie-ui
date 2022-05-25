@@ -1,4 +1,5 @@
 import { get } from 'lodash';
+import { toast } from 'react-toastify';
 import { React, useState } from 'react';
 
 import Login from '../../components/Login';
@@ -20,8 +21,6 @@ const LoginContainer = props => {
 		const response = await authenticate({ email, password });
         const responseData = get(response.data, 'data');
 
-        console.log(responseData);
-
 		setLoading(false);
 
 		if (response.data && (response.data.status === 'success' && responseData.token)) {
@@ -35,11 +34,20 @@ const LoginContainer = props => {
             const errorData = get(response.data, 'data');
 
 			setError(mappedErrorCodes[errorData] || 'Algum erro aconteceu, tente novamente mais tarde.');
+
+            toast.error(error, {
+                position: 'bottom-center',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
 		}
 	};
 
     return <Login
-            error={error}
             loading={loading}
             onLoginClick={onLoginClick}
             onSignUpClick={onSignUpClick}
