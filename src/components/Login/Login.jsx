@@ -35,22 +35,22 @@ const Login = ({
                     </Heading>
                 </Stack>
                 <Formik initialValues={{ email: '', password: '' }} onSubmit={onLoginClick}>
-						{({ values, handleChange, handleSubmit }) => (
-							<Box>
-								<Stack>
-									<FormLabel>Email</FormLabel>
-									<Input type={'email'} name={'email'} disabled={loading} placeholder="Informe seu email" onChange={handleChange} />
-								</Stack>
+                        {({ values, handleChange, handleSubmit }) => (
+                            <Box>
+                                <Stack>
+                                    <FormLabel>Email</FormLabel>
+                                    <Input type={'email'} name={'email'} disabled={loading} placeholder="Informe seu email" onChange={handleChange} />
+                                </Stack>
 
-								<Stack direction={'column'} marginTop={3}>
-									<Stack direction={'row'} justify={'space-between'}>
+                                <Stack direction={'column'} marginTop={3}>
+                                    <Stack direction={'row'} justify={'space-between'}>
                                         <FormLabel>Senha</FormLabel>
                                         <Link onClick={onForgotPasswordClick} color={"gray.400"} _hover={{ color:"green.400" }}>
                                             Esqueceu a senha?
                                         </Link>
-									</Stack>
-									<Input type={'password'} name={'password'} disabled={loading} placeholder="Informe sua senha" onChange={handleChange} />
-								</Stack>
+                                    </Stack>
+                                    <Input type={'password'} name={'password'} disabled={loading} placeholder="Informe sua senha" onChange={handleChange} />
+                                </Stack>
 
                                 <Stack spacing={10}>
                                     <Button bg={"green.400"} color={"white"} _hover={{ bg: "green.500" }} onClick={handleSubmit} disabled={!values.email || !values.password} marginTop={5} isLoading={loading}>
@@ -66,9 +66,9 @@ const Login = ({
                                         Cadastre-se
                                     </Link>
                                 </Stack>
-							</Box>
-						)}
-					</Formik>
+                            </Box>
+                        )}
+                    </Formik>
             </Stack>
         </Flex>
     );
