@@ -21,7 +21,7 @@ const Root = () => (
 	<>
         <ToastContainer/>
         <ChakraProvider>
-            <Router basename="/home">
+            <Router basename="/">
                 <Switch>
                     <Route exact path="/(login|sign-up|forgot-password|reset-password|activate|register-success)" component={Auth} />
                 </Switch>
